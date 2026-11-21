@@ -2,38 +2,27 @@
 
 **Founder of Draft Wink | Web Developer | Young Entrepreneur**
 
-I'm Ferid Oci, a 16-year-old entrepreneur and web developer from Azerbaijan. I'm currently building **Draft Wink**, an AI-powered website and application creation platform.
+I'm **Ferid Oci**, a young entrepreneur and web developer from Azerbaijan. I'm independently building **Draft Wink**, an AI-powered website and application creation platform.
 
-I'm developing my projects independently, without outside funding or a team. My focus is on learning, shipping useful software, and growing Draft Wink step by step.
+Draft Wink is **currently in development**. My goal is to release its first version, grow the product globally by **2028**, and eventually establish a technology company in the United States.
 
 ## 🚀 What I'm Building
 
-- **Draft Wink** — An AI-powered website and app builder (currently in development; not yet launched).
-- **Web Development** — Building websites, interfaces, and digital products.
-- **Entrepreneurship** — Learning to turn ideas into practical software.
+- **Draft Wink** — AI-powered website and app builder *(in development)*
+- **Web Development** — Websites, interfaces, and digital products
+- **AI & SaaS** — Exploring accessible software creation with artificial intelligence
 
-## 🎯 My Goals
+## 🛠️ Interests
 
-- Launch the first version of Draft Wink.
-- Work toward growing Draft Wink internationally by **2028**.
-- Eventually establish my own technology company in the **United States**.
+Web Development · Artificial Intelligence · SaaS · UI/UX · Entrepreneurship
 
-These are **goals**, not completed achievements.
+## 🔗 Connect With Me
 
-## 🛠️ Areas of Interest
-
-- Web development
-- Artificial intelligence
-- SaaS products
-- UI/UX design
-- Startups and entrepreneurship
-
-## 🔗 Find Me
-
-- 🌐 [Personal website](https://feridoci29-prog.github.io/)
-- 💻 [GitHub profile](https://github.com/feridoci29-prog)
+- 🌐 **Website:** [Ferid Oci](https://feridoci29-prog.github.io/)
+- 💼 **LinkedIn:** [Ferid Oci](https://www.linkedin.com/in/feridoci/)
+- 𝕏 **Draft Wink:** [@DraftWink](https://x.com/DraftWink)
+- 💻 **GitHub:** [feridoci29-prog](https://github.com/feridoci29-prog)
 
 > Just me, my computer, and a vision to build something meaningful.
 
----
-*Building in public, learning, and improving every day.*
+*Currently building and learning. Plans are goals, not claims of completed achievements.*
