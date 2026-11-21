@@ -1,12 +1,39 @@
-# Ferid Oci — İlham Aldığım İsimler / Inspirations
+# Hi, I'm Ferid Oci 👋
 
-A bilingual, responsive personal inspiration site by **Ferid Oci**, connected to his main website: https://feridoci29-prog.github.io/
+**Founder of Draft Wink | Web Developer | Young Entrepreneur**
 
-**Live project URL after GitHub Pages is enabled:** https://feridoci29-prog.github.io/ferid-oci/
+I'm Ferid Oci, a 16-year-old entrepreneur and web developer from Azerbaijan. I'm currently building **Draft Wink**, an AI-powered website and application creation platform.
 
-Features animated cards for Cristiano Ronaldo, David Goggins, Zach Yadegari and Brez Scales. The cards are personal inspiration only and do not imply endorsement or affiliation. No photographs, logos or unsupported claims about partnerships.
+I'm developing my projects independently, without outside funding or a team. My focus is on learning, shipping useful software, and growing Draft Wink step by step.
 
-## Deploy via GitHub Pages
-In this repository open **Settings → Pages → Build and deployment → Deploy from a branch → main → /(root) → Save**.
+## 🚀 What I'm Building
 
-The main site's inspiration section links to this repository and its project URL. The user site also hosts a matching fallback page under `/ferid-oci/`, so the destination works even if this project has not yet enabled Pages.
+- **Draft Wink** — An AI-powered website and app builder (currently in development; not yet launched).
+- **Web Development** — Building websites, interfaces, and digital products.
+- **Entrepreneurship** — Learning to turn ideas into practical software.
+
+## 🎯 My Goals
+
+- Launch the first version of Draft Wink.
+- Work toward growing Draft Wink internationally by **2028**.
+- Eventually establish my own technology company in the **United States**.
+
+These are **goals**, not completed achievements.
+
+## 🛠️ Areas of Interest
+
+- Web development
+- Artificial intelligence
+- SaaS products
+- UI/UX design
+- Startups and entrepreneurship
+
+## 🔗 Find Me
+
+- 🌐 [Personal website](https://feridoci29-prog.github.io/)
+- 💻 [GitHub profile](https://github.com/feridoci29-prog)
+
+> Just me, my computer, and a vision to build something meaningful.
+
+---
+*Building in public, learning, and improving every day.*
