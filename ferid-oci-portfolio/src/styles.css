@@ -516,10 +516,24 @@ h2 {
   outline-offset: 6px;
 }
 .project-coming-soon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 100%;
   margin: -12px 0 22px;
-  color: var(--effect-cyan);
+  padding: 12px 16px;
+  border: 1px solid color-mix(in oklch, var(--effect-cyan) 32%, var(--border));
+  border-radius: 10px;
+  background: color-mix(in oklch, var(--effect-cyan) 8%, var(--card));
+  color: var(--foreground);
   font-size: 13px;
   line-height: 1.5;
+  box-shadow: 0 8px 32px color-mix(in oklch, var(--effect-cyan) 8%, transparent);
+}
+.project-coming-soon svg {
+  flex: 0 0 auto;
+  color: var(--effect-cyan);
 }
 .project-feature {
   display: grid;
@@ -896,15 +910,19 @@ h2 {
 }
 .cursor-light {
   position: fixed;
-  left: -8px;
-  top: -8px;
-  width: 16px;
-  height: 16px;
+  left: -16px;
+  top: -16px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid color-mix(in oklch, var(--highlight) 50%, transparent);
-  box-shadow: 0 0 18px 5px oklch(0.65 0.21 292 / 12%);
+  border: 1px solid color-mix(in oklch, var(--effect-cyan) 58%, transparent);
+  background: color-mix(in oklch, var(--effect-cyan) 7%, transparent);
+  box-shadow:
+    0 0 18px 5px color-mix(in oklch, var(--effect-cyan) 18%, transparent),
+    inset 0 0 12px color-mix(in oklch, var(--effect-violet) 12%, transparent);
   z-index: 50;
   pointer-events: none;
+  will-change: transform;
 }
 .skip-link {
   position: fixed;
@@ -1341,7 +1359,7 @@ body::before {
   background:
     radial-gradient(
       38rem circle at var(--pointer-x, 50vw) var(--pointer-y, 42vh),
-      color-mix(in oklch, var(--effect-cyan) 17%, transparent),
+      color-mix(in oklch, var(--effect-cyan) 24%, transparent),
       transparent 72%
     ),
     radial-gradient(

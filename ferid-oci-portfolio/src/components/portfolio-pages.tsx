@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useRef, useState, type ReactNode } from "react";
 import {
   ArrowUpRight,
@@ -190,11 +190,22 @@ function Project({ lang, full = false }: { lang: Language; full?: boolean }) {
           )}
         </div>
       </Reveal>
-      {comingSoon && (
-        <p className="project-coming-soon" role="status" aria-live="polite">
-          Draft Wink is currently in development. Stay tuned for updates.
-        </p>
-      )}
+      <AnimatePresence initial={false}>
+        {comingSoon && (
+          <motion.p
+            className="project-coming-soon"
+            role="status"
+            aria-live="polite"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.24, ease: "easeOut" }}
+          >
+            <Sparkles size={15} aria-hidden="true" />
+            <span>Coming soon — Draft Wink is still in development.</span>
+          </motion.p>
+        )}
+      </AnimatePresence>
       <Reveal className="project-feature">
         <div className="project-copy">
           <span className="status-badge">

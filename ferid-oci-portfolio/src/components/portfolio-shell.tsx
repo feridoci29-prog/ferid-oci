@@ -59,7 +59,7 @@ function CursorLight() {
   const sx = useSpring(x, { stiffness: 300, damping: 35 }),
     sy = useSpring(y, { stiffness: 300, damping: 35 });
   useEffect(() => {
-    const media = matchMedia("(pointer: fine) and (min-width: 900px)");
+    const media = matchMedia("(pointer: fine)");
     setEnabled(media.matches && !reduced);
     if (!media.matches || reduced) return;
     x.set(window.innerWidth / 2);
