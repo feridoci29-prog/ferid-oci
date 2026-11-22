@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import {
   ArrowUpRight,
   ArrowDown,
@@ -168,6 +168,8 @@ function Overview({ lang }: { lang: Language }) {
 
 function Project({ lang, full = false }: { lang: Language; full?: boolean }) {
   const t = copy[lang];
+  const [comingSoon, setComingSoon] = useState(false);
+  const announceComingSoon = () => setComingSoon(true);
   return (
     <section id="selected-work" className="section project-section container">
       <Reveal>
@@ -177,13 +179,22 @@ function Project({ lang, full = false }: { lang: Language; full?: boolean }) {
             <h2>{t.projectHeading}</h2>
           </div>
           {!full && (
-            <Link className="text-link" to={paths[lang].projects}>
+            <button
+              type="button"
+              className="text-link project-discover"
+              onClick={announceComingSoon}
+            >
               {t.projectAction}
               <ArrowUpRight size={16} />
-            </Link>
+            </button>
           )}
         </div>
       </Reveal>
+      {comingSoon && (
+        <p className="project-coming-soon" role="status" aria-live="polite">
+          Draft Wink is currently in development. Stay tuned for updates.
+        </p>
+      )}
       <Reveal className="project-feature">
         <div className="project-copy">
           <span className="status-badge">
@@ -198,19 +209,19 @@ function Project({ lang, full = false }: { lang: Language; full?: boolean }) {
             <span>Web</span>
             <span>Apps</span>
           </div>
-          <Button variant="glass" asChild>
-            {full ? (
+          {full ? (
+            <Button variant="glass" asChild>
               <a href={profiles.x} target="_blank" rel="noopener noreferrer">
                 {t.follow}
                 <ArrowUpRight />
               </a>
-            ) : (
-              <Link to={paths[lang].projects}>
-                {t.projectAction}
-                <ArrowUpRight />
-              </Link>
-            )}
-          </Button>
+            </Button>
+          ) : (
+            <Button variant="glass" onClick={announceComingSoon}>
+              {t.projectAction}
+              <ArrowUpRight />
+            </Button>
+          )}
         </div>
         <div className="project-visual">
           <img
@@ -381,6 +392,7 @@ function Contact({ lang, compact = false }: { lang: Language; compact?: boolean 
 }
 
 export function PortfolioPage({ page, language: lang }: { page: Page; language: Language }) {
+  const t = copy[lang];
   return (
     <motion.div key={`${page}-${lang}`} initial={false}>
       {page === "home" && (

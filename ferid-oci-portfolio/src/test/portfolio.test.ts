@@ -5,24 +5,24 @@ import { siteURL } from "@/lib/site";
 import { sitemapXML } from "@/lib/sitemap";
 
 describe("Portfolio identity and language rules", () => {
-  it("defaults to English and maps Turkish page URLs", () => {
+  it("keeps all paths in English and maps legacy Turkish URLs to English content", () => {
     expect(languageFromPath("/")).toBe("en");
-    expect(languageFromPath("/tr/projects")).toBe("tr");
+    expect(languageFromPath("/tr/projects")).toBe("en");
     expect(pageFromPath("/tr/projects")).toBe("projects");
-    expect(paths.tr.contact).toBe("/tr/contact");
+    expect(paths.en.contact).toBe("/contact");
   });
   it("uses the production canonical origin", () => {
     expect(siteURL).toBe("https://ferid-oci.vercel.app");
     expect(portfolioHead("home", "en").meta[0]).toMatchObject({
       title: "Ferid Oci | Founder of Draft Wink",
     });
-    const head = portfolioHead("projects", "tr");
+    const head = portfolioHead("projects", "en");
     expect(head.links.find((link) => link.rel === "canonical")?.href).toBe(
-      "https://ferid-oci.vercel.app/tr/projects",
+      "https://ferid-oci.vercel.app/projects",
     );
     expect(
       head.links.filter((link) => link.rel === "alternate").map((link) => link.hrefLang),
-    ).toEqual(["en", "tr", "x-default"]);
+    ).toEqual(["en", "x-default"]);
   });
   it("keeps project development status and verified personal profiles accurate", () => {
     const script = portfolioHead("home", "en").scripts[0];
@@ -60,13 +60,12 @@ describe("Portfolio identity and language rules", () => {
     expect(profiles.x).toBe("https://x.com/DraftWink");
   });
 
-  it("exports all bilingual public destinations without fake timestamps", () => {
-    const entries = [...Object.values(paths.en), ...Object.values(paths.tr)].map((path) => ({
-      path,
-    }));
+  it("exports only English public destinations without fake timestamps", () => {
+    const entries = Object.values(paths.en).map((path) => ({ path }));
     const xml = sitemapXML(siteURL, entries);
-    expect(xml.match(/<url>/g)).toHaveLength(10);
-    expect(xml).toContain("<loc>https://ferid-oci.vercel.app/tr/vision</loc>");
+    expect(xml.match(/<url>/g)).toHaveLength(5);
+    expect(xml).toContain("<loc>https://ferid-oci.vercel.app/vision</loc>");
+    expect(xml).not.toContain("/tr/");
     expect(xml).not.toContain("<lastmod>");
     expect(() => sitemapXML(siteURL, [{ path: "//bad.example" }])).toThrow();
   });

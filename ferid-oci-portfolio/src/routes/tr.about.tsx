@@ -1,11 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { PortfolioPage } from '@/components/portfolio-pages';
-import { portfolioHead } from '@/lib/portfolio';
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/tr/about')({
-  staticData: { sitemap: true },
-  head: () => portfolioHead('about', 'tr'),
-  component: Page,
+export const Route = createFileRoute("/tr/about")({
+  staticData: { sitemap: false },
+  beforeLoad: () => {
+    throw redirect({ to: "/about" });
+  },
 });
-
-function Page() { return <PortfolioPage page="about" language="tr"/>; }

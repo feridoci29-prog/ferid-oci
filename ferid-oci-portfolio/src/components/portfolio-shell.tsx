@@ -1,17 +1,10 @@
-import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 import { ArrowUpRight, Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getSocialLinks } from "@/lib/social-links";
-import {
-  copy,
-  languageFromPath,
-  pageFromPath,
-  paths,
-  type Language,
-  type Page,
-} from "@/lib/portfolio";
+import { copy, pageFromPath, paths, type Language, type Page } from "@/lib/portfolio";
 
 export function Brand({ project = false }: { project?: boolean }) {
   return project ? (
@@ -25,6 +18,39 @@ export function Brand({ project = false }: { project?: boolean }) {
   );
 }
 
+function AmbientInteraction() {
+  const reduced = useReducedMotion();
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty("--pointer-x", "50vw");
+    root.style.setProperty("--pointer-y", "42vh");
+    if (reduced) return;
+
+    let frame = 0;
+    let pointerX = window.innerWidth / 2;
+    let pointerY = window.innerHeight * 0.42;
+    const move = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        root.style.setProperty("--pointer-x", `${pointerX}px`);
+        root.style.setProperty("--pointer-y", `${pointerY}px`);
+        frame = 0;
+      });
+    };
+
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", move);
+      cancelAnimationFrame(frame);
+    };
+  }, [reduced]);
+
+  return null;
+}
+
 function CursorLight() {
   const reduced = useReducedMotion();
   const [enabled, setEnabled] = useState(false);
@@ -36,6 +62,8 @@ function CursorLight() {
     const media = matchMedia("(pointer: fine) and (min-width: 900px)");
     setEnabled(media.matches && !reduced);
     if (!media.matches || reduced) return;
+    x.set(window.innerWidth / 2);
+    y.set(window.innerHeight / 2);
     const move = (event: MouseEvent) => {
       x.set(event.clientX);
       y.set(event.clientY);
@@ -162,35 +190,26 @@ function ClickSparks() {
 
 export function PortfolioShell({ children }: { children: ReactNode }) {
   const location = useLocation();
-  const navigate = useNavigate();
-  const lang = languageFromPath(location.pathname),
-    page = pageFromPath(location.pathname),
-    t = copy[lang];
+  const lang: Language = "en";
+  const page = pageFromPath(location.pathname);
+  const t = copy.en;
   const [open, setOpen] = useState(false);
   useEffect(() => {
-    document.documentElement.lang = lang;
+    document.documentElement.lang = "en";
     setOpen(false);
-  }, [lang, location.pathname]);
-  useEffect(() => {
-    const saved = localStorage.getItem("ferid-language");
-    if (saved === "tr" && location.pathname === "/") void navigate({ to: "/tr", replace: true });
-  }, []);
-  function changeLanguage(next: Language) {
-    localStorage.setItem("ferid-language", next);
-    void navigate({ to: paths[next][page] });
-  }
+  }, [location.pathname]);
   const items: Page[] = ["home", "about", "projects", "vision", "contact"];
   return (
     <>
       <a href="#main-content" className="skip-link">
-        {lang === "en" ? "Skip to content" : "İçeriğe geç"}
+        Skip to content
       </a>
       <header className="site-header">
         <div className="nav-inner">
           <Link to={paths[lang].home} aria-label="Ferid Oci">
             <Brand />
           </Link>
-          <nav className="desktop-nav" aria-label={lang === "en" ? "Main navigation" : "Ana menü"}>
+          <nav className="desktop-nav" aria-label="Main navigation">
             {items.map((key) => (
               <Link
                 key={key}
@@ -203,27 +222,6 @@ export function PortfolioShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="nav-actions">
-            <div className="languages" aria-label={lang === "en" ? "Language" : "Dil"}>
-              <Button
-                variant="ghost"
-                size="sm"
-                className={lang === "en" ? "language active" : "language"}
-                onClick={() => changeLanguage("en")}
-                aria-pressed={lang === "en"}
-              >
-                ENG
-              </Button>
-              <span>/</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                className={lang === "tr" ? "language active" : "language"}
-                onClick={() => changeLanguage("tr")}
-                aria-pressed={lang === "tr"}
-              >
-                TR
-              </Button>
-            </div>
             <Button
               className="mobile-menu-button"
               variant="ghost"
@@ -283,6 +281,7 @@ export function PortfolioShell({ children }: { children: ReactNode }) {
           ))}
         </div>
       </footer>
+      <AmbientInteraction />
       <MouseTrail />
       <ClickSparks />
       <CursorLight />

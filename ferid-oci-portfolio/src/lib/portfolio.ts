@@ -1,6 +1,6 @@
 import { absoluteURL } from "./site";
 
-export type Language = "en" | "tr";
+export type Language = "en";
 export type Page = "home" | "about" | "projects" | "vision" | "contact";
 
 export const profiles = {
@@ -15,17 +15,10 @@ export const profiles = {
 
 export const paths = {
   en: { home: "/", about: "/about", projects: "/projects", vision: "/vision", contact: "/contact" },
-  tr: {
-    home: "/tr",
-    about: "/tr/about",
-    projects: "/tr/projects",
-    vision: "/tr/vision",
-    contact: "/tr/contact",
-  },
 } as const;
 
-export function languageFromPath(path: string): Language {
-  return path === "/tr" || path.startsWith("/tr/") ? "tr" : "en";
+export function languageFromPath(_path: string): Language {
+  return "en";
 }
 
 export function pageFromPath(path: string): Page {
@@ -294,14 +287,11 @@ export function portfolioHead(page: Page, language: Language) {
       { property: "og:description", content: description ?? "Ferid Oci — Draft Wink" },
       { property: "og:type", content: "website" },
       { property: "og:url", content: absoluteURL(paths[language][page]) },
-      { property: "og:locale", content: language === "tr" ? "tr_TR" : "en_US" },
+      { property: "og:locale", content: "en_US" },
       { property: "og:image", content: absoluteURL("/images/ferid-workspace.webp") },
       {
         property: "og:image:alt",
-        content:
-          language === "en"
-            ? "Ferid Oci's portfolio with a violet-lit creative workspace"
-            : "Ferid Oci’nin mor ışıklı yaratıcı çalışma alanı",
+        content: "Ferid Oci's portfolio with a violet-lit creative workspace",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: title ?? "Ferid Oci" },
@@ -311,7 +301,6 @@ export function portfolioHead(page: Page, language: Language) {
     links: [
       { rel: "canonical", href: absoluteURL(paths[language][page]) },
       { rel: "alternate", hrefLang: "en", href: absoluteURL(paths.en[page]) },
-      { rel: "alternate", hrefLang: "tr", href: absoluteURL(paths.tr[page]) },
       { rel: "alternate", hrefLang: "x-default", href: absoluteURL(paths.en[page]) },
     ],
     scripts: [
