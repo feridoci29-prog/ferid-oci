@@ -55,6 +55,59 @@ const sparkPalette = [
   "var(--effect-mint)",
 ];
 
+type MouseTrailPoint = { id: number; x: number; y: number; color: string };
+
+function MouseTrail() {
+  const reduced = useReducedMotion();
+  const [points, setPoints] = useState<MouseTrailPoint[]>([]);
+
+  useEffect(() => {
+    if (reduced) return;
+    let nextId = 0;
+    let lastX: number | null = null;
+    let lastY: number | null = null;
+    const handleMouseMove = (event: MouseEvent) => {
+      if (
+        lastX !== null &&
+        lastY !== null &&
+        Math.hypot(event.clientX - lastX, event.clientY - lastY) < 18
+      ) {
+        return;
+      }
+      lastX = event.clientX;
+      lastY = event.clientY;
+      const id = ++nextId;
+      setPoints((current) => [
+        ...current.slice(-11),
+        {
+          id,
+          x: event.clientX,
+          y: event.clientY,
+          color: sparkPalette[(id - 1) % sparkPalette.length],
+        },
+      ]);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [reduced]);
+
+  return (
+    <div className="mouse-trails" aria-hidden="true">
+      {points.map((point) => (
+        <span
+          key={point.id}
+          className="mouse-trail"
+          style={{ left: point.x, top: point.y, "--trail-color": point.color } as CSSProperties}
+          onAnimationEnd={() =>
+            setPoints((current) => current.filter((item) => item.id !== point.id))
+          }
+        />
+      ))}
+    </div>
+  );
+}
+
 type ClickBurst = { id: number; x: number; y: number; color: string };
 
 function ClickSparks() {
@@ -230,6 +283,7 @@ export function PortfolioShell({ children }: { children: ReactNode }) {
           ))}
         </div>
       </footer>
+      <MouseTrail />
       <ClickSparks />
       <CursorLight />
     </>
