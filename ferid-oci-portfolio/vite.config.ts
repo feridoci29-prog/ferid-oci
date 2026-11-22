@@ -19,6 +19,9 @@ const env = loadEnv(
 export default defineConfig({
   nitro: { preset: "vercel" },
   vite: {
+    server: {
+      allowedHosts: ["sb-5wk2eqzejg5n.vercel.run"],
+    },
     define: {
       "import.meta.env.VITE_SITE_URL": JSON.stringify(
         process.env["NEXT_PUBLIC_SITE_URL"] ||
