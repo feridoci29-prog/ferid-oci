@@ -21,6 +21,7 @@ Web Development · Artificial Intelligence · SaaS · UI/UX · Entrepreneurship
 - 📝 **Hashnode article:** [Building Draft Wink From Zero — Ferid Oci](https://feridoci.hashnode.dev/building-draft-wink-ferid-oci)
 - ✍️ **DEV Community:** [Ferid Oci](https://dev.to/feridoci)
 - 🌐 **Website:** [Ferid Oci](https://feridoci29-prog.github.io/)
+- 🧩 **Peerlist:** [Ferid Oci](https://peerlist.io/feridoci)
 - 💼 **LinkedIn:** [Ferid Oci](https://www.linkedin.com/in/feridoci/)
 - 𝕏 **Draft Wink:** [@DraftWink](https://x.com/DraftWink)
 - 💻 **GitHub:** [feridoci29-prog](https://github.com/feridoci29-prog)
