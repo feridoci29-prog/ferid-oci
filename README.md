@@ -16,6 +16,10 @@ Draft Wink is **currently in development**. My goal is to release its first vers
 
 Web Development · Artificial Intelligence · SaaS · UI/UX · Entrepreneurship
 
+## 🌐 Portfolio source code
+
+The complete updated **Ferid Oci** React/TanStack portfolio is now available in the [portfolio/](./portfolio) directory. It includes EN/TR, original abstract motion graphics and the linked public profiles. The static GitHub Pages website is a separate, older deployment; this framework project requires a compatible deployment runtime.
+
 ## 🔗 Connect With Me
 
 - 📝 **Hashnode article:** [Building Draft Wink From Zero — Ferid Oci](https://feridoci.hashnode.dev/building-draft-wink-ferid-oci)
