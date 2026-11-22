@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 import { ArrowUpRight, Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -46,6 +46,65 @@ function CursorLight() {
   return enabled ? (
     <motion.div aria-hidden="true" className="cursor-light" style={{ x: sx, y: sy }} />
   ) : null;
+}
+
+const sparkPalette = [
+  "var(--effect-cyan)",
+  "var(--effect-violet)",
+  "var(--effect-pink)",
+  "var(--effect-mint)",
+];
+
+type ClickBurst = { id: number; x: number; y: number; color: string };
+
+function ClickSparks() {
+  const reduced = useReducedMotion();
+  const [bursts, setBursts] = useState<ClickBurst[]>([]);
+
+  useEffect(() => {
+    if (reduced) return;
+    let nextId = 0;
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target instanceof Element ? event.target : null;
+      const bounds = target?.getBoundingClientRect();
+      const x = event.detail === 0 && bounds ? bounds.left + bounds.width / 2 : event.clientX;
+      const y = event.detail === 0 && bounds ? bounds.top + bounds.height / 2 : event.clientY;
+      const burst = {
+        id: ++nextId,
+        x,
+        y,
+        color: sparkPalette[Math.floor(Math.random() * sparkPalette.length)],
+      };
+      setBursts((current) => [...current.slice(-4), burst]);
+    };
+
+    document.addEventListener("click", handleClick, { passive: true });
+    return () => document.removeEventListener("click", handleClick);
+  }, [reduced]);
+
+  return (
+    <div className="click-sparks" aria-hidden="true">
+      {bursts.map((burst) => (
+        <span
+          key={burst.id}
+          className="click-spark"
+          style={{ left: burst.x, top: burst.y, "--spark-color": burst.color } as CSSProperties}
+          onAnimationEnd={(event) => {
+            if (event.target !== event.currentTarget) return;
+            setBursts((current) => current.filter((item) => item.id !== burst.id));
+          }}
+        >
+          {Array.from({ length: 8 }, (_, index) => (
+            <i
+              key={index}
+              className="click-spark__particle"
+              style={{ "--spark-angle": `${index * 45}deg` } as CSSProperties}
+            />
+          ))}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 export function PortfolioShell({ children }: { children: ReactNode }) {
@@ -171,6 +230,7 @@ export function PortfolioShell({ children }: { children: ReactNode }) {
           ))}
         </div>
       </footer>
+      <ClickSparks />
       <CursorLight />
     </>
   );
