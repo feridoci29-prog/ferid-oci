@@ -94,6 +94,12 @@ export const copy = {
       },
     ],
     aboutLabel: "THE PERSON BEHIND THE PROJECT",
+    overviewHeading: "Technology, built with purpose.",
+    overviewCards: [
+      "Building accessible digital experiences that turn ideas into useful products.",
+      "Exploring thoughtful ways AI can make creating simpler and more intuitive.",
+      "Developing an independent product with a clear, long-term vision.",
+    ],
     aboutHeading: "Curiosity meets commitment.",
     aboutIntro:
       "I’m Ferid Oci, a young entrepreneur and web developer from Azerbaijan. I’m drawn to the space where technology, thoughtful design, and entrepreneurship come together.",
@@ -211,6 +217,12 @@ export const copy = {
       },
     ],
     aboutLabel: "PROJENİN ARKASINDAKİ KİŞİ",
+    overviewHeading: "Amaç odaklı teknoloji.",
+    overviewCards: [
+      "Fikirleri kullanışlı ürünlere dönüştüren erişilebilir dijital deneyimler geliştiriyorum.",
+      "Yapay zekânın üretim sürecini nasıl daha kolay ve sezgisel kılabileceğini araştırıyorum.",
+      "Net ve uzun vadeli bir vizyonla bağımsız bir ürün geliştiriyorum.",
+    ],
     aboutHeading: "Merak ve kararlılık bir arada.",
     aboutIntro:
       "Ben Ferid Oci, Azerbaycan’dan genç bir girişimci ve web geliştiriciyim. Teknoloji, özenli tasarım ve girişimciliğin kesiştiği alan ilgimi çekiyor.",

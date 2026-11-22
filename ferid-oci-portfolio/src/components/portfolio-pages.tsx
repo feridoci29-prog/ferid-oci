@@ -140,6 +140,33 @@ function Hero({ lang }: { lang: Language }) {
   );
 }
 
+function Overview({ lang }: { lang: Language }) {
+  const t = copy[lang];
+  const cards = [
+    { title: t.skills[0], text: t.overviewCards[0] },
+    { title: t.skills[1], text: t.overviewCards[1] },
+    { title: t.skills[2], text: t.overviewCards[2] },
+  ];
+  return (
+    <section id="about" className="section home-overview container">
+      <Reveal>
+        <p className="eyebrow">{t.aboutLabel}</p>
+        <h2>{t.overviewHeading}</h2>
+        <p className="overview-intro">{t.aboutIntro}</p>
+      </Reveal>
+      <div className="overview-cards">
+        {cards.map((card, index) => (
+          <Reveal key={card.title} className="overview-card" delay={index * 0.07}>
+            <span className="overview-index">0{index + 1}</span>
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Project({ lang, full = false }: { lang: Language; full?: boolean }) {
   const t = copy[lang];
   return (
@@ -355,7 +382,6 @@ function Contact({ lang, compact = false }: { lang: Language; compact?: boolean 
 }
 
 export function PortfolioPage({ page, language: lang }: { page: Page; language: Language }) {
-  const t = copy[lang];
   return (
     <motion.div
       key={`${page}-${lang}`}
@@ -366,14 +392,8 @@ export function PortfolioPage({ page, language: lang }: { page: Page; language: 
       {page === "home" && (
         <>
           <Hero lang={lang} />
+          <Overview lang={lang} />
           <Project lang={lang} />
-          <section className="about-strip container">
-            <p>{t.from}</p>
-            <Link to={paths[lang].about}>
-              {t.aboutAction}
-              <ArrowUpRight size={17} />
-            </Link>
-          </section>
           <Vision lang={lang} />
           <Contact lang={lang} compact />
         </>
