@@ -27,11 +27,10 @@ function Reveal({
   className?: string;
   delay?: number;
 }) {
-  const reduced = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial={reduced ? false : { opacity: 0, y: 24 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
@@ -383,12 +382,7 @@ function Contact({ lang, compact = false }: { lang: Language; compact?: boolean 
 
 export function PortfolioPage({ page, language: lang }: { page: Page; language: Language }) {
   return (
-    <motion.div
-      key={`${page}-${lang}`}
-      initial={{ opacity: 0.5 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.35 }}
-    >
+    <motion.div key={`${page}-${lang}`} initial={false}>
       {page === "home" && (
         <>
           <Hero lang={lang} />
